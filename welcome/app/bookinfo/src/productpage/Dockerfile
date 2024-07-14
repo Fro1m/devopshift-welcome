@@ -1,5 +1,5 @@
 
-FROM python:3.12.1-slim as buildstage
+FROM python:3.12.1-slim as build
 
 WORKDIR /
 COPY requirements.txt ./
@@ -7,7 +7,7 @@ RUN pip3 install -vvv --require-hashes --no-cache-dir -r requirements.txt
 COPY test-requirements.txt ./
 RUN pip3 install --no-cache-dir --require-hashes -r test-requirements.txt
 
-FROM python:3.12.1-slim as teststage
+FROM python:3.12.1-slim as test
 
 COPY --from=buildstage / /
 WORKDIR /
@@ -17,7 +17,7 @@ COPY templates /opt/microservices/templates
 COPY static /opt/microservices/static
 COPY requirements.txt /opt/microservices/
 
-FROM python:3.12.1-slim as runstage
+FROM python:3.12.1-slim as run
 
 COPY --from=teststage / /
 ARG flood_factor
