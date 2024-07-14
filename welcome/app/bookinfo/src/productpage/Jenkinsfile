@@ -4,7 +4,9 @@ environment {
     REPO='fro1m'
     CREDENTIALS_ID='docker-credentials'
     }
+
 pipeline{
+    agent any
     stages {
         stage('Build'){
             steps {
