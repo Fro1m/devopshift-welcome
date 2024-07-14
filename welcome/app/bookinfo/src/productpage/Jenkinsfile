@@ -1,12 +1,13 @@
-environment {
+pipeline{
+    agent any
+    
+    environment {
     IMAGE_NAME='jb_course_test'
     VERSION="v${env.BUILD_NUMBER}"
     REPO='fro1m'
     CREDENTIALS_ID='docker-credentials'
     }
 
-pipeline{
-    agent any
     stages {
         stage('Build'){
             steps {
@@ -22,8 +23,8 @@ pipeline{
             steps {
                 script{
                     //Build and test the Docker image
-                    sh "docker build --target build --tag ${IMAGE_NAME}:${VERSION}-build ."
-                    sh "docker run --rm ${IMAGE_NAME}:${VERSION}-test"
+                    sh 'docker build --target build --tag ${IMAGE_NAME}:${VERSION}-build .'
+                    sh 'docker run --rm ${IMAGE_NAME}:${VERSION}-test'
                 }
             }
         }
