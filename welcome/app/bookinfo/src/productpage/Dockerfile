@@ -1,23 +1,27 @@
 
-FROM python:3.12.1-slim
+FROM python:3.12.1-slim as buildstage
 
 WORKDIR /
-
 COPY requirements.txt ./
 RUN pip3 install -vvv --require-hashes --no-cache-dir -r requirements.txt
-
 COPY test-requirements.txt ./
 RUN pip3 install --no-cache-dir --require-hashes -r test-requirements.txt
 
+FROM python:3.12.1-slim as teststage
+
+COPY --from=buildstage / /
+WORKDIR /
 COPY productpage.py /opt/microservices/
 COPY tests/unit/* /opt/microservices/
 COPY templates /opt/microservices/templates
 COPY static /opt/microservices/static
 COPY requirements.txt /opt/microservices/
 
+FROM python:3.12.1-slim as runstage
+
+COPY --from=teststage / /
 ARG flood_factor
 ENV FLOOD_FACTOR ${flood_factor:-0}
-
 EXPOSE 9080
 WORKDIR /opt/microservices
 RUN python -m unittest discover
