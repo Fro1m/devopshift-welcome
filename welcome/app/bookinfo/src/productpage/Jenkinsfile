@@ -1,6 +1,6 @@
 pipeline{
     agent any
-    
+
     environment {
     IMAGE_NAME='jb_course_test'
     VERSION="v${env.BUILD_NUMBER}"
@@ -13,7 +13,7 @@ pipeline{
             steps {
                 script {
                     //Build the Docker image for the build stage
-                    sh 'docker build --target build --tag ${IMAGE_NAME}:${VERSION}-build .'
+                    sh 'docker build --target build --tag ${IMAGE_NAME}:${VERSION}-build -f /welcome/app/bookinfo/src/productpage/Dockerfile .'
                 }
             }
 
