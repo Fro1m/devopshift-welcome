@@ -4,34 +4,35 @@ environment {
     REPO='fro1m'
     CREDENTIALS_ID='docker-credentials'
     }
+pipeline{
+    stages {
+        stage('Build'){
+            steps {
+                script {
+                    //Build the Docker image for the build stage
+                    sh 'docker build --target build --tag ${IMAGE_NAME}:${VERSION}-build .'
+                }
+            }
 
-stages {
-    stage('Build'){
-        steps {
-            script {
-                //Build the Docker image for the build stage
-                sh 'docker build --target build --tag ${IMAGE_NAME}:${VERSION}-build .'
+        }
+
+        stage('Test') {
+            steps {
+                script{
+                    //Build and test the Docker image
+                    sh 'docker build --target build --tag ${IMAGE_NAME}:${VERSION}-build .'
+                    sh 'docker run --rm ${IMAGE_NAME}:${VERSION}-test'
+                }
             }
         }
 
-    }
-
-    stage('Test') {
-        steps {
-            script{
-                //Build and test the Docker image
-                sh 'docker build --target build --tag ${IMAGE_NAME}:${VERSION}-build .'
-                sh 'docker run --rm ${IMAGE_NAME}:${VERSION}-test'
-            }
-        }
-    }
-
-    stage('Push') {
-        steps{
-            script{
-                //Push the docker image to repo
-                docker.withRegistry('https://index.docker.io/v1/', "${CREDENTIALS_ID}") {
-                    sh 'docker push ${REPO}/${IMAGE_NAME}:${VERSION}'
+        stage('Push') {
+            steps{
+                script{
+                    //Push the docker image to repo
+                    docker.withRegistry('https://index.docker.io/v1/', "${CREDENTIALS_ID}") {
+                        sh 'docker push ${REPO}/${IMAGE_NAME}:${VERSION}'
+                    }
                 }
             }
         }
