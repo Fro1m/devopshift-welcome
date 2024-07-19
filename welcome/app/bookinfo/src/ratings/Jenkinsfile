@@ -22,20 +22,11 @@ pipeline{
         stage('Lint') {
             steps {
                 script{
-                    sh 'docker build --target test --tag ${IMAGE_NAME}:${VERSION}-test -f welcome/app/bookinfo/src/ratings/Dockerfile .'
+                    sh 'docker build --target lint-test --tag ${IMAGE_NAME}:${VERSION}-lint-test -f welcome/app/bookinfo/src/ratings/Dockerfile .'
                 }
             }
         }
 
-        stage('Test') {
-            steps {
-                script{
-                    //Build and test the Docker image
-                    sh 'docker build --target test --tag ${IMAGE_NAME}:${VERSION}-test -f welcome/app/bookinfo/src/ratings/Dockerfile .'
-                    sh 'docker run --rm ${IMAGE_NAME}:${VERSION}-test'
-                }
-            }
-        }
 
         stage('Push') {
             steps{

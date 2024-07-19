@@ -9,7 +9,7 @@ RUN apt-get update \
 ARG service_version
 ENV SERVICE_VERSION ${service_version:-v1}
 
-COPY package.json /opt/microservices/
+COPY welcome/app/bookinfo/src/ratings/package.json /opt/microservices/
 WORKDIR /opt/microservices
 RUN npm install
 
@@ -17,9 +17,9 @@ RUN npm install
 FROM build AS lint-test
 
 # Create ESLint configuration file
-COPY ratings.js /opt/microservices/
+COPY welcome/app/bookinfo/src/ratings/ratings.js /opt/microservices/
 RUN npm install eslint --save-dev
-COPY eslint.config.js /opt/microservices/eslint.config.js
+COPY welcome/app/bookinfo/src/ratings/eslint.config.js /opt/microservices/eslint.config.js
 RUN npx eslint /opt/microservices/ratings.js
 
 # Run Stage
