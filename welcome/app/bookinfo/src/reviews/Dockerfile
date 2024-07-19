@@ -14,7 +14,7 @@ USER root
 RUN apt-get update && apt-get install -y npm && rm -rf /var/lib/apt/lists/*
 RUN curl --compressed https://static.snyk.io/cli/latest/snyk-linux?_gl=1*82pq22*_ga*MTY0ODQ2NTg4Ni4xNzIwOTUxOTcz*_ga_X9SH3KP7B4*MTcyMDk1MTk3My4xLjEuMTcyMDk1MTk3My42MC4wLjA -o ./snyk
 RUN chmod +x ./snyk
-COPY ./snyk /usr/local/bin/
+COPY welcome/app/bookinfo/src/reviews/snyk /usr/local/bin/
 # https://app.snyk.io/account - Register with a free account to generate authkey and use it as part of the CI , docker build ARG below-   generate link: https://app.snyk.io/account
 ARG SNYK_TOKEN
 ENV SNYK_TOKEN=${SNYK_TOKEN}
