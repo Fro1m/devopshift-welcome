@@ -4,7 +4,7 @@ FROM gradle:8.6.0-jdk8 AS builder
 # Not sure why but we need root to build. Ignore lint error, this is for a multistage builder so it doesn't matter.
 # hadolint ignore=DL3002
 USER 0
-COPY ./src/ /home/gradle
+COPY welcome/app/bookinfo/src/reviews/src/ /home/gradle
 
 RUN gradle build
 
