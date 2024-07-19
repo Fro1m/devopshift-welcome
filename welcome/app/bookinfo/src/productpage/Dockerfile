@@ -11,10 +11,10 @@ FROM python:3.12.1-slim as test
 
 COPY --from=build / /
 WORKDIR /
-COPY productpage.py /opt/microservices/
-COPY tests/unit/* /opt/microservices/
-COPY templates /opt/microservices/templates
-COPY static /opt/microservices/static
+COPY welcome/app/bookinfo/src/productpage/productpage.py /opt/microservices/
+COPY welcome/app/bookinfo/src/productpage/tests/unit/* /opt/microservices/
+COPY welcome/app/bookinfo/src/productpage/templates /opt/microservices/templates
+COPY welcome/app/bookinfo/src/productpage/static /opt/microservices/static
 COPY welcome/app/bookinfo/src/productpage/requirements.txt /opt/microservices/
 
 FROM python:3.12.1-slim as run
