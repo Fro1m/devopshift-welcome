@@ -15,7 +15,7 @@ COPY productpage.py /opt/microservices/
 COPY tests/unit/* /opt/microservices/
 COPY templates /opt/microservices/templates
 COPY static /opt/microservices/static
-COPY requirements.txt /opt/microservices/
+COPY welcome/app/bookinfo/src/productpage/requirements.txt /opt/microservices/
 
 FROM python:3.12.1-slim as run
 
