@@ -34,7 +34,7 @@ pipeline{
                 script{
                     //Push the docker image to repo
                     docker.withRegistry('https://index.docker.io/v1/', "${CREDENTIALS_ID}") {
-                        sh 'docker build --target run --tag ${IMAGE_NAME}:${VERSION} -f welcome/app/bookinfo/src/productpage/Dockerfile .'
+                        sh 'docker build --target run --tag ${REPO}/${IMAGE_NAME}:${VERSION} -f welcome/app/bookinfo/src/productpage/Dockerfile .'
                         sh 'docker push ${REPO}/${IMAGE_NAME}:${VERSION}'
                     }
                 }
