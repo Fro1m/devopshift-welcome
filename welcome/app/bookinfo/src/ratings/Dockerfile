@@ -29,7 +29,7 @@ WORKDIR /opt/microservices
 
 # Copy the necessary files from the build stage
 COPY --from=build /opt/microservices /opt/microservices
-COPY ratings.js /opt/microservices/
+COPY welcome/app/bookinfo/src/ratings/ratings.js /opt/microservices/
 
 EXPOSE 9080
 
