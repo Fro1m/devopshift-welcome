@@ -18,7 +18,7 @@ COPY welcome/app/bookinfo/src/reviews/snyk /usr/local/bin/
 # https://app.snyk.io/account - Register with a free account to generate authkey and use it as part of the CI , docker build ARG below-   generate link: https://app.snyk.io/account
 ARG SNYK_TOKEN
 ENV SNYK_TOKEN=${SNYK_TOKEN}
-RUN welcome/app/bookinfo/src/reviews/snyk test /home/gradle/ --all-sub-projects
+RUN ./snyk test /home/gradle/ --all-sub-projects
 
 # Run Stage
 FROM open-liberty:24.0.0.1-kernel-slim-java17-openj9 as run
