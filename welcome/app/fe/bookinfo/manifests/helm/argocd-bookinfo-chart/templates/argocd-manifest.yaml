@@ -15,9 +15,14 @@ spec:
     server: {{ .Values.argoApplication.server }}
     namespace: {{ .Values.argoApplication.namespace }}
   syncPolicy:
-    automated:
-      prune: {{ .Values.argoApplication.prune }}
-      selfHeal: {{ .Values.argoApplication.selfHeal }}
-      
+  automated:
+    prune: false
+    selfHeal: true
+  syncOptions:
+    - CreateNamespace=true
+  hooks:
+    - type: SyncFail
+      command: ["/bin/sh", "-c"]
+      args: ["echo SyncFail hook executed"] 
 {{- end }}
 
