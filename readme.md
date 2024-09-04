@@ -6,7 +6,7 @@ In this lab, you will explore users, groups, and policies in the AWS Identity an
 
 **Objectives**
 
-After completing this lab, you will know how to:
+After completing this lab, you will know how to::
 
 - Explore pre-created **IAM Users and Groups**
 - Inspect **IAM policies** as applied to the pre-created groups
@@ -45,11 +45,11 @@ The following IAM users have been created for you:
 - user-2
 - user-3
 
-| **User** | **In Group** | **Permissions** |
-| --- | --- | --- |
-| user-1 | S3-Support | Read-only access to Amazon S3 |
-| user-2 | EC2-Support | Read-only access to Amazon EC2 |
-| user-3 | EC2-Admin | View, Start, and Stop Amazon EC2 instances |
+| **User** | **In Group** | **Permissions**                            |
+| -------- | ------------ | ------------------------------------------ |
+| user-1   | S3-Support   | Read-only access to Amazon S3              |
+| user-2   | EC2-Support  | Read-only access to Amazon EC2             |
+| user-3   | EC2-Admin    | View, Start, and Stop Amazon EC2 instances |
 
 1. Choose the name of **user-1**.
    - This brings you to a summary page for user-1. The **Permissions** tab will be displayed.
@@ -77,6 +77,7 @@ Choose the name of the **EC2-Support** group. This brings you to the summary pag
 
 2. Under **Policy Name**, choose the link for the **AmazonEC2ReadOnlyAccess** policy.
 3. Choose the **{} JSON** tab.
+
    - A policy defines what actions are allowed or denied for specific AWS resources. This policy is granting permission to _List_ and _Describe_ (view) information about Amazon Elastic Compute Cloud (Amazon EC2), Elastic Load Balancing, Amazon CloudWatch, and Amazon EC2 Auto Scaling. This ability to view resources, but not modify them, is ideal for assigning to a support role.
    - Statements in an IAM policy have the following basic structure:
      - **Effect** says whether to _Allow_ or _Deny_ the permissions.
